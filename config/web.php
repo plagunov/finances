@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$urlManager = require __DIR__ . '/url_manager.php';
 
 $config = [
     'id' => 'basic',
@@ -47,23 +48,17 @@ $config = [
         'db' => $db,
         'layout'=>'column2',
         'layoutPath'=>'@app/themes/adminLTE/layouts',
-        'urlManager' => [
-            'class' => 'yii\web\UrlManager',
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-                ''=>'site/index',
-                '<action:(index|login|logout)>'=>'site/<action>',
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>'
-            ],
-        ],
+        'urlManager' => $urlManager,
         'view' => [
             'theme' => [
                 'pathMap' => ['@app/views' => '@app/themes/adminLTE'],
                 'baseUrl' => '@web/../themes/adminLTE',
             ],
+        ],
+    ],
+    'modules' => [
+        'finances' => [
+            'class' => 'app\modules\Finances',
         ],
     ],
     'params' => $params,
@@ -75,14 +70,14 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
 
