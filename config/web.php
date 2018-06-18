@@ -58,7 +58,7 @@ $config = [
     ],
     'modules' => [
         'finances' => [
-            'class' => 'app\modules\Finances',
+            'class' => 'app\modules\finances\Finances',
         ],
     ],
     'params' => $params,
